@@ -41,11 +41,11 @@ classdef goldmine < handle
             end
 
             jsonrequest = tojson(request);
-            jsonresponse = jsonrpcpost(jsonrequest, self.url);        
+            jsonresponse = jsonrpcpost(jsonrequest, self.url);          
             response = fromjson(jsonresponse);
-            
+
             if isfield(response, 'error') 
-                throw(MException('JSONRPC:error', response.error.message))
+                throw(MException('JSONRPC:Error', response.error.message))
             else
                 object = response.result;
             end

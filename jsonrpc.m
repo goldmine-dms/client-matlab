@@ -13,9 +13,7 @@ function object = jsonrpc( url, method, params, auth )
     end
     
     jsonrequest = tojson(request);
-
     jsonresponse = jsonrpcpost(jsonrequest, url);
-    tic;   
     response = fromjson(jsonresponse);
     
     if isfield(response, 'error') 
