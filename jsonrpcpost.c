@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+#ifdef _MSC_VER
+#define CURL_STATICLIB
+#endif
+
 #include <curl/curl.h>
 #include "mex.h"
 
@@ -41,10 +46,9 @@ char* query(char *json, char *service){
     CURL *curl;
     CURLcode res;
     struct curl_slist *hl = NULL; 
-
-    curl = curl_easy_init();
-
     struct string s;
+    
+    curl = curl_easy_init();
     init_string(&s);
 
     if(curl) {

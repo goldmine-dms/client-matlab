@@ -2,12 +2,18 @@
 #include <string.h>
 #include "mex.h"
 
+/*  setjsonfield(struct, name, value) 
+
+Setting the attrubute of struct to an illegal MATLAB name. */
 
 void mexFunction (int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[])
 {  
     void *ptr;
     void *newptr;
     int size;
+    int strlen;
+    char* name;
+    mxArray* value;
 
     if (nrhs != 3) { 
         mexErrMsgTxt("Three input arguments required (struct, name, value).");
@@ -18,9 +24,8 @@ void mexFunction (int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[])
     }
 
     
-    int strlen;
-    char* name;
-    mxArray* value = mxDuplicateArray(prhs[2]);
+    
+    value = mxDuplicateArray(prhs[2]);
 
     strlen = mxGetN(prhs[1]) * mxGetM(prhs[1]);
     name = mxMalloc(sizeof(char*) * (strlen + 1));
@@ -33,7 +38,3 @@ void mexFunction (int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[])
     mxSetField(prhs[0], 0, name, value);
 
 }
-
-
-
-
